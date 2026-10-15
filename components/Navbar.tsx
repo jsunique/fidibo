@@ -4,7 +4,7 @@ import icon from "@/public/icons/fidibo-mobile-light.svg"
 import {User , ShoppingBasket , Search} from "lucide-react"
 export default function Navbar() {
   return (
-    <div className='flex flex-col  w-full bg-red-500 px-4 py-3 gap-5'>
+    <div className='fixed flex flex-col  w-full bg-red-500 px-4 py-3 gap-5 md:px-20'>
 
 
       <div className='flex justify-between items-center gap-3'>
