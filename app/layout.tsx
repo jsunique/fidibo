@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const kahraba = localFont({
+  src:[
+    {path:"./fonts/Kahroba-FD-B-EHC.ttf",weight:"700"},
+    {path:"./fonts/Kahroba-FD-L-ELC.ttf",weight:"300"},
+    {path:"./fonts/Kahroba-FD-M-ELC.ttf",weight:"500"},
+    {path:"./fonts/Kahroba-FD-RG-ELC.ttf",weight:"400"},
+  ],
+  display:"swap"
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,10 +22,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="fa"
+      dir="rtl"
+      className={` h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className={`min-h-full flex flex-col ${kahraba.className}`}>
+        <Navbar />
+        {children}
+        </body>
     </html>
   );
 }
