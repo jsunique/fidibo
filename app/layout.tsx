@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Phone from "@/components/Phone";
+
 
 const kahraba = localFont({
   src:[
@@ -26,9 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={` h-full antialiased`}
     >
-      <body className={`min-h-full flex flex-col ${kahraba.className}`}>
+      <body className={`min-h-full flex flex-col relative ${kahraba.className}`}>
         <Navbar />
         {children}
+        <Phone />
         </body>
     </html>
   );
