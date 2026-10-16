@@ -7,8 +7,9 @@ import arrow from "@/public/icons/fidibo-arrow-inspect.png"
 import {User , ShoppingBasket , Search , SunMoon} from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 export default function Navbar() {
-
+  const pathName = usePathname()
    const [searchHidden, setSearchHidden] = useState(false);
   const previousScrollY = useRef(0);
   useEffect(()=>{
@@ -44,8 +45,9 @@ export default function Navbar() {
     };
 
   },[])
-
-
+  if (pathName === "/login" || pathName === "/signup") {
+    return null;
+  }
   return (
     <>
     <div className='desktop:hidden fixed inset-x-0 top-0 mt-0 z-50 flex flex-col  w-full  px-4 pt-3 md:px-20 bg-background text-foreground'>
