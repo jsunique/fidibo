@@ -90,7 +90,7 @@ export default function Navbar() {
             <Link href="">مجلات</Link>
             <Link href="">درسی و دانشگاهی</Link>
             <Link href="">پادکست</Link>
-      2     <Link href="">فیدی پلاس</Link>
+            <Link href="">فیدی پلاس</Link>
           </div>
 
 
