@@ -3,15 +3,17 @@ import React from 'react'
 import Image from "next/image"
 import icon from "@/public/icons/fidibo-mobile-light.svg"
 import icon2 from "@/public/icons/fidibo-desktop-light.svg"
+import arrow from "@/public/icons/fidibo-arrow-inspect.png"
 import {User , ShoppingBasket , Search , SunMoon} from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import Link from 'next/link'
 export default function Navbar() {
 
    const [searchHidden, setSearchHidden] = useState(false);
   const previousScrollY = useRef(0);
   useEffect(()=>{
 
-    const mobile = window.matchMedia("(width < 1140)");
+    const mobile = window.matchMedia("(width < 1140px)");
     previousScrollY.current = window.scrollY;
 
     function handleScroll(){
@@ -71,12 +73,32 @@ export default function Navbar() {
       </div>
 
       <div className='flex flex-col  w-full h-full'>
-        <div className='relative flex w-full h-1/2 items-center gap-4'>
-          <input type="text" placeholder='جستجو' className='w-[70%] h-[70%] mt-6 outline-none border-none bg-primary-foreground px-10' />
-          <Search className='absolute top-1/2 right-2' />
-          <button className='gap-2 h-[70%] w-[14%] cursor-pointer border border-border mt-6 px-2 flex items-center rounded-[5px] flex items-center justify-center'><User width={20} />ورود / ثبت نام</button>
-          <button className='h-[70%] cursor-pointer border border-border mt-6 px-2 rounded-[5px] w-12 flex justify-center items-center'><ShoppingBasket /></button>
-          <button className='h-[70%] hover:bg-white cursor-pointer mt-6 px-2 rounded-[5px] w-12 flex justify-center items-center'><SunMoon/></button>
+        <div className='relative flex w-full h-1/2 items-center gap-6'>
+          <input type="text" placeholder='جستجو' className='w-[70%] h-[78%] mt-9 outline-none border-none bg-primary-foreground px-10 placeholder:text-[14px]' />
+          <Search className='absolute top-9  right-2' />
+          <button className='gap-2 h-[78%] w-[14%] cursor-pointer border border-border mt-9 px-2 flex items-center rounded-[5px] flex items-center justify-center'><User width={20} />ورود / ثبت نام</button>
+          <button className='h-[78%] cursor-pointer border border-border mt-9 px-2 rounded-[5px] w-12 flex justify-center items-center'><ShoppingBasket /></button>
+          <button className='h-[78%] hover:bg-white cursor-pointer mt-9 px-2 rounded-[5px] w-12 flex justify-center items-center'><SunMoon/></button>
+        </div>
+
+
+        <div className="flex w-full h-full  items-center justify-between ">
+          <div className='flex mt-6 text-[14px] font-medium gap-8'>
+            <Link href="">خانه</Link>
+            <Link href="">کتاب الکترونیکی</Link>
+            <Link href="">کتاب صوتی</Link>
+            <Link href="">مجلات</Link>
+            <Link href="">درسی و دانشگاهی</Link>
+            <Link href="">پادکست</Link>
+      2     <Link href="">فیدی پلاس</Link>
+          </div>
+
+
+          <div className='flex mt-6 ml-6 text-[14px] items-center justify-center'>
+            <p>دانلود اپلیکیشن</p>
+             <Image src={arrow} alt='' width={23} height={23}/>
+            
+          </div>
         </div>
       </div>
 
