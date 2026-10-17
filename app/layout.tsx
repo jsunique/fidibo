@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Phone from "@/components/Phone";
+import StoreProvider from "@/lib/features/auth/storeProvider";
 
 
 const kahraba = localFont({
@@ -28,11 +29,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={` h-full antialiased`}
     >
+      <StoreProvider>
       <body className={`min-h-full flex flex-col relative ${kahraba.className}`}>
         <Navbar />
         {children}
         <Phone />
         </body>
+      </StoreProvider>
     </html>
   );
 }
