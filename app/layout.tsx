@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Phone from "@/components/Phone";
 import StoreProvider from "@/lib/features/auth/storeProvider";
+import { Suspense } from "react";
 
 
 const kahraba = localFont({
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       dir="rtl"
       className={` h-full antialiased`}
     >
+    <Suspense fallback={null}>
       <StoreProvider>
       <body className={`min-h-full flex flex-col relative ${kahraba.className}`}>
         <Navbar />
@@ -36,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Phone />
         </body>
       </StoreProvider>
+      </Suspense>
     </html>
   );
 }

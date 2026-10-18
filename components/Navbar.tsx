@@ -8,10 +8,16 @@ import {User , ShoppingBasket , Search , SunMoon} from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSelector } from 'react-redux'
+import type { RootState } from '@/lib/features/auth/store'
 export default function Navbar() {
   const pathName = usePathname()
    const [searchHidden, setSearchHidden] = useState(false);
   const previousScrollY = useRef(0);
+  const currentUserId = useSelector(
+    (state:RootState) => state.auth.currentUserId
+  )
+
   useEffect(()=>{
 
     const mobile = window.matchMedia("(width < 1140px)");
@@ -92,10 +98,8 @@ export default function Navbar() {
             <Link href="">مجلات</Link>
             <Link href="">درسی و دانشگاهی</Link>
             <Link href="">پادکست</Link>
-      2     <Link href="">فیدی پلاس</Link>
+            <Link href="">فیدی پلاس</Link>
           </div>
-
-
           <div className='flex mt-6 ml-6 text-[14px] items-center justify-center'>
             <p>دانلود اپلیکیشن</p>
              <Image src={arrow} alt='' width={23} height={23}/>

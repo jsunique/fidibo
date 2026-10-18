@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { Users } from "lucide-react"
 
 type cartItem = {
   price:number,
@@ -13,6 +12,7 @@ type user = {
   username:string,
   email:string,
   password:string,
+  favorits:string[],
   cart:cartItem[],
 }
 
@@ -73,6 +73,23 @@ const authSlice = createSlice({
     restoreData(state,action:PayloadAction<authState>){
       state.currentUserId = action.payload.currentUserId;
       state.users = action.payload.users
+    },
+    toggleFavorite(state,action:PayloadAction<string>){
+      const thisuser = state.users.find((user)=>{
+        return user.id === state.currentUserId;
+      });
+      if (!thisuser) {
+        return
+      }
+      else if (thisuser.favorits.includes(action.payload)) {
+        thisuser.favorits = thisuser.favorits.filter((book)=>{
+          return book !== action.payload
+        })
+      }
+      else{
+        thisuser.favorits.push(action.payload)
+      }
+
     }
   },
 })
@@ -85,5 +102,6 @@ export const {
   restoreData,
   removeFromCart,
   addToCart,
+  toggleFavorite
 } = authSlice.actions;
 export default authSlice.reducer;
