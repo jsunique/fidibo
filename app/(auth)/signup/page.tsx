@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from 'react'
-import {User} from "lucide-react"
+import {User } from "lucide-react"
 import icon from "@/public/icons/fidibo-mobile-light.svg"
 import Image from "next/image";
 import Link from "next/link"
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '@/lib/features/auth/store';
+import { useDispatch, useSelector } from 'react-redux'
+import type { RootState } from '@/lib/features/auth/store'
 import {registerUser} from "@/lib/features/auth/authSlice"
 import { useRouter } from 'next/navigation';
 export default function SignUp() {
@@ -31,7 +31,7 @@ export default function SignUp() {
       return item.email === email;
     });
     if(userIsExist) {
-      setError("این ایمیل وحود دارد");
+      setError("این ایمیل وجد دارد از پایین صفحه وارد شوید");
       setUsername("");
       setPassword("");
       setEmail("");

@@ -4,12 +4,15 @@ import Image from "next/image"
 import icon from "@/public/icons/fidibo-mobile-light.svg"
 import icon2 from "@/public/icons/fidibo-desktop-light.svg"
 import arrow from "@/public/icons/fidibo-arrow-inspect.png"
-import {User , ShoppingBasket , Search , SunMoon} from "lucide-react"
+import {User , ShoppingBasket , Search , SunMoon , PanelLeft , LogOut} from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { UseDispatch } from 'react-redux'
+import { logOutUser } from '@/lib/features/auth/authSlice'
 import type { RootState } from '@/lib/features/auth/store'
+import { current } from '@reduxjs/toolkit'
 export default function Navbar() {
   const pathName = usePathname()
    const [searchHidden, setSearchHidden] = useState(false);
@@ -17,6 +20,7 @@ export default function Navbar() {
   const currentUserId = useSelector(
     (state:RootState) => state.auth.currentUserId
   )
+  const dispatch = useDispatch();
 
   useEffect(()=>{
 
@@ -62,7 +66,17 @@ export default function Navbar() {
       <div className='flex items-center gap-3'> 
         <button><ShoppingBasket /></button>
         <div className='bg-black w-[1px] h-4 bg-border'></div>
-        <button><User /></button>
+        {
+          currentUserId 
+          ? 
+          pathName === "/profile"
+          ?
+          <Link onClick={()=>dispatch(logOutUser())} href="/"><LogOut /></Link> 
+          :
+          <Link href="/profile"><PanelLeft /></Link> 
+          : 
+          <Link href="/signup"><User /></Link>
+        }
       </div>
       </div>
       <div className={`flex absolute inset-x-0 top-full md:px-20
@@ -84,7 +98,22 @@ export default function Navbar() {
         <div className='relative flex w-full h-1/2 items-center gap-6'>
           <input type="text" placeholder='جستجو' className='w-[70%] h-[78%] mt-9 outline-none border-none bg-primary-foreground px-10 placeholder:text-[14px]' />
           <Search className='absolute top-9  right-2' />
-          <button className='gap-2 h-[78%] w-[14%] cursor-pointer border border-border mt-9 px-2 flex items-center rounded-[5px] flex items-center justify-center'><User width={20} />ورود / ثبت نام</button>
+          {
+            currentUserId ? 
+            pathName === "/profile" 
+            ?
+          <Link onClick={()=>dispatch(logOutUser())} href="/" className='gap-2 h-[78%] w-[10%] cursor-pointer border border-border mt-9 px-2 flex items-center rounded-[5px] flex items-center justify-center'>
+          <LogOut width={20} />خروج </Link>   
+            :
+            
+          <Link href="/profile" className='gap-2 h-[78%] w-[10%] cursor-pointer border border-border mt-9 px-2 flex items-center rounded-[5px] flex items-center justify-center'>
+          <PanelLeft width={20} />پروفایل </Link>  
+            :
+          <Link href="/signup" className='gap-2 h-[78%] w-[14%] cursor-pointer border border-border mt-9 px-2 flex items-center rounded-[5px] flex items-center justify-center'>
+          <User width={20} />ورود / ثبت نام
+          </Link>
+          }
+
           <button className='h-[78%] cursor-pointer border border-border mt-9 px-2 rounded-[5px] w-12 flex justify-center items-center'><ShoppingBasket /></button>
           <button className='h-[78%] hover:bg-white cursor-pointer mt-9 px-2 rounded-[5px] w-12 flex justify-center items-center'><SunMoon/></button>
         </div>
